@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Socket.IO Fiddle</title>
+  </head>
+
+  <body>
+    <h2>Status: <span id="status">Disconnected</span></h2>
+    <h2>Messages:</h2>
+    <ul id="messages"></ul>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const status = document.getElementById("status");
+      const messages = document.getElementById("messages");
+
+      const appendMessage = (content) => {
+        const item = document.createElement("li");
+        item.textContent = content;
+        messages.appendChild(item);
+      };
+
+      const socket = io({
+        // Socket.IO options
+      });
+
+      socket.on("connect", () => {
+        status.innerText = "Connected";
+        appendMessage(`event: connect | session id: ${socket.id}`);
+      });
+
+      socket.on("connect_error", (err) => {
+        appendMessage(`event: connect_error | reason: ${err.message}`);
+      });
+
+      socket.on("disconnect", (reason) => {
+        status.innerText = "Disconnected";
+        appendMessage(`event: disconnect | reason: ${reason}`);
+      });
+
+      socket.onAny((event, ...args) => {
+        appendMessage(`event: ${event} | arguments: ${args}`);
+      });
+    </script>
+  </body>
+</html>
