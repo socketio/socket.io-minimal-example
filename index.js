@@ -1,6 +1,6 @@
-const { readFileSync } = require("fs");
-const { createServer } = require("http");
-const { Server } = require("socket.io");
+import { readFileSync } from "fs";
+import { createServer } from "http";
+import { Server } from "socket.io";
 
 const httpServer = createServer((req, res) => {
   if (req.url !== "/") {

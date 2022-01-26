@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Socket.IO minimal example",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node index.js"
   },
